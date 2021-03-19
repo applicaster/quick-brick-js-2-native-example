@@ -1,0 +1,12 @@
+{
+  "name": "js2nativePlayground",
+  "displayName": "js2nativePlayground",
+  "expo": {
+    "name": "js2nativePlayground",
+    "slug": "js2nativePlayground",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
