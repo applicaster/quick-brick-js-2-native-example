@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
-import { Surface, Title, Text } from "react-native-paper";
+import { Surface, Title } from "react-native-paper";
 
 import JS2Native from "@applicaster/quick-brick-js-2-native";
 

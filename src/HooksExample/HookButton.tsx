@@ -2,7 +2,7 @@ import React from "react";
 import { ViewStyle } from "react-native";
 import { Button } from "react-native-paper";
 
-import { JS2Native } from "../js2Native";
+import JS2Native from "@applicaster/quick-brick-js-2-native";
 
 type Props = {
   title: string;
