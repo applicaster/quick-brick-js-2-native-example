@@ -11,8 +11,9 @@ import { StorageForm } from "./Form";
 import { ErrorBox } from "./ErrorBox";
 import { RadioButtons } from "./RadioButtons";
 import { ResultBox } from "./ResultBox";
+import { buttons, StorageTypes } from "./consts";
 
-import JS2Native from "@applicaster/quick-brick-js-2-native";
+import JS2Native from "../JS2Native";
 
 const stringifyIfNeeded = (val: any): string => {
   if (typeof val === "string") return val;
@@ -69,10 +70,24 @@ const setProps = {
   title: "Set item in Storage",
 };
 
-const { sessionStorage } = JS2Native();
+function getFormProps(formType: StorageTypes) {
+  const title = buttons.find(({ value }) => value === formType)
+    ?.label as string;
+
+  if (formType.includes("get")) {
+    return { ...getProps, title };
+  } else {
+    return { ...setProps, title };
+  }
+}
+
+const bridge = JS2Native() || {};
 
 export function StorageExample() {
-  const [formType, setFormType] = useState<"get" | "set">("get");
+  const [formType, setFormType] = useState<StorageTypes>(
+    "sessionStorage.getItem"
+  );
+
   const [key, setKey] = useState<string>("");
   const [namespace, setNamespace] = useState<string>("");
   const [value, setValue] = useState<string>("");
@@ -93,7 +108,7 @@ export function StorageExample() {
         return;
       }
 
-      if (formType === "set" && !values.value) {
+      if (formType.includes("setItem") && !values.value) {
         setValue("");
         setErrorMessage("value is required");
 
@@ -101,27 +116,18 @@ export function StorageExample() {
       }
 
       setErrorMessage("");
-      console.log(`requesting storage value for ${values.key}`);
-      let _result;
 
       try {
-        if (formType === "set") {
-          _result = await sessionStorage?.setItem(
-            values.key,
-            values.value,
-            values.namespace || undefined
-          );
-        } else {
-          _result = await sessionStorage?.getItem(
-            values.key,
-            values.namespace || undefined
-          );
+        const [storage, method] = formType.split(".");
+
+        const args = [values.key, values.namespace || undefined];
+
+        if (method.includes("set")) {
+          args.splice(1, 0, values.value);
         }
 
-        console.log(`${formType} in storage`, {
-          values,
-          result: _result,
-        });
+        // @ts-ignore
+        const _result = await bridge?.[storage]?.[method]?.apply?.(null, args);
 
         setKey(values.key);
         setNamespace(values.namespace);
@@ -136,11 +142,7 @@ export function StorageExample() {
 
   useEffect(() => {
     clearValues();
-    if (formType === "get") {
-      setFormProps(getProps);
-    } else {
-      setFormProps(setProps);
-    }
+    setFormProps(getFormProps(formType));
   }, [formType]);
 
   return (

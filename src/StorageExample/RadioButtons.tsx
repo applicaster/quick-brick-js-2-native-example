@@ -2,14 +2,19 @@ import React from "react";
 import { TextStyle, View, ViewStyle } from "react-native";
 import { RadioButton, Title } from "react-native-paper";
 
+import { buttons, StorageTypes } from "./consts";
+
 type Props = {
   styles: Record<string, ViewStyle | TextStyle>;
-  onValueChange: (value: "get" | "set") => void;
-  value: "get" | "set";
+  onValueChange: (value: StorageTypes) => void;
+  value: StorageTypes;
 };
 
+const isChecked = (value: string, type: StorageTypes) =>
+  value === type ? "checked" : "unchecked";
+
 export function RadioButtons(props: Props) {
-  const { styles, onValueChange, value } = props;
+  const { styles, onValueChange, value: selectedButton } = props;
 
   return (
     <View style={styles.radioContainer}>
@@ -17,20 +22,15 @@ export function RadioButtons(props: Props) {
         Do you want to set or get a value from storage ?
       </Title>
       <RadioButton.Group
-        onValueChange={(v) => onValueChange(v as "get" | "set")}
-        value={value}
+        onValueChange={(v) => onValueChange(v as StorageTypes)}
+        value={selectedButton}
       >
-        <RadioButton.Item
-          label="Get"
-          value="get"
-          status={value === "get" ? "checked" : "unchecked"}
-        />
-
-        <RadioButton.Item
-          label="Set"
-          value="set"
-          status={value === "set" ? "checked" : "unchecked"}
-        />
+        {buttons.map(({ label, value }, key) => (
+          <RadioButton.Item
+            {...{ key, label, value }}
+            status={isChecked(selectedButton, value)}
+          />
+        ))}
       </RadioButton.Group>
     </View>
   );

@@ -1,15 +1,16 @@
 import React from "react";
 import { Text } from "react-native-paper";
+import { StorageTypes } from "./consts";
 
 type Props = {
   value: string;
   storageKey: string;
   namespace: string;
-  formType: "get" | "set";
+  formType: StorageTypes;
 };
 
 export function ResultBox({ value, formType, storageKey, namespace }: Props) {
-  if (formType === "set" && value) {
+  if (formType.includes("set") && value) {
     return (
       <Text>
         Result successfully set in storage for key {storageKey}{" "}
@@ -18,7 +19,7 @@ export function ResultBox({ value, formType, storageKey, namespace }: Props) {
     );
   }
 
-  if (formType === "get" && value) {
+  if (formType.includes("get") && value) {
     return (
       <>
         <Text>

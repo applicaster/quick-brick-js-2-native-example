@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { Surface, Title } from "react-native-paper";
 
-import JS2Native from "@applicaster/quick-brick-js-2-native";
+import JS2Native from "../JS2Native";
 
 import { HookButton } from "./HookButton";
 
-const { hooks } = JS2Native();
+const { screenHook } = JS2Native() || {};
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +47,7 @@ export function HooksExample() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (hooks?.data?.payload) {
+    if (screenHook?.data?.payload) {
       setHooksEnabled(true);
     }
     setReady(true);

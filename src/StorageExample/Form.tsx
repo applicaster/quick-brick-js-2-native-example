@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import { TextInput, Surface, Title, Button } from "react-native-paper";
+import { TextInput, Title, Button } from "react-native-paper";
 import { TextStyle, ViewStyle } from "react-native";
 
 type Props = {
