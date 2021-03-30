@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 
 type FormProps = {
   submitMessage: string;
@@ -13,7 +13,7 @@ import { RadioButtons } from "./RadioButtons";
 import { ResultBox } from "./ResultBox";
 import { buttons, StorageTypes } from "./consts";
 
-import JS2Native from "../JS2Native";
+import JS2Native from "@applicaster/quick-brick-js-2-native";
 
 const stringifyIfNeeded = (val: any): string => {
   if (typeof val === "string") return val;
@@ -147,20 +147,23 @@ export function StorageExample() {
 
   return (
     <View style={styles.container}>
-      <RadioButtons
-        styles={styles}
-        onValueChange={setFormType}
-        value={formType}
-      />
-      <StorageForm styles={styles} onSubmit={onSubmit} {...formProps} />
-      <ErrorBox errorMessage={errorMessage} styles={styles} />
+      <ScrollView style={{ flex: 1 }}>
+        <RadioButtons
+          styles={styles}
+          onValueChange={setFormType}
+          value={formType}
+        />
 
-      <ResultBox
-        storageKey={key}
-        namespace={namespace}
-        formType={formType}
-        value={value}
-      />
+        <StorageForm styles={styles} onSubmit={onSubmit} {...formProps} />
+        <ErrorBox errorMessage={errorMessage} styles={styles} />
+
+        <ResultBox
+          storageKey={key}
+          namespace={namespace}
+          formType={formType}
+          value={value}
+        />
+      </ScrollView>
     </View>
   );
 }

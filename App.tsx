@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   DefaultTheme,
   Provider as PaperProvider,
@@ -23,23 +23,20 @@ export default function App() {
   });
 
   return (
-    <PaperProvider theme={DefaultTheme}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <PaperProvider theme={DefaultTheme}>
         <BottomNavigation
           renderScene={renderScene}
           onIndexChange={setIndex}
           navigationState={{ index, routes }}
         />
-      </View>
-    </PaperProvider>
+      </PaperProvider>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    alignItems: "stretch",
   },
 });

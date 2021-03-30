@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { Surface, Title } from "react-native-paper";
 
-import JS2Native from "../JS2Native";
+import JS2Native from "@applicaster/quick-brick-js-2-native";
 
 import { HookButton } from "./HookButton";
 

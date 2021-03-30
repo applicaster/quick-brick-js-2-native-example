@@ -19,7 +19,7 @@ export function RadioButtons(props: Props) {
   return (
     <View style={styles.radioContainer}>
       <Title style={styles.title}>
-        Do you want to set or get a value from storage ?
+        Select type of storage and action to test
       </Title>
       <RadioButton.Group
         onValueChange={(v) => onValueChange(v as StorageTypes)}
