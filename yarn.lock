@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@applicaster/quick-brick-js-2-native@5.1.0-alpha.1859f7dc":
-  version "5.1.0-alpha.1859f7dc"
-  resolved "https://registry.yarnpkg.com/@applicaster/quick-brick-js-2-native/-/quick-brick-js-2-native-5.1.0-alpha.1859f7dc.tgz#dccaff61f96687e38334bceac50db20bd9d3978a"
-  integrity sha512-sLCh6YaVGx5wwesTLvtXpNEU/6vW9lgN/0QuS5UirSUK2Ct3ShNID08FgqK7IfzDadQCen/AorHTAY4Fpz9vwQ==
+"@applicaster/quick-brick-js-2-native@^5.1.0-alpha.a263d3b7":
+  version "5.1.0-alpha.a263d3b7"
+  resolved "https://registry.yarnpkg.com/@applicaster/quick-brick-js-2-native/-/quick-brick-js-2-native-5.1.0-alpha.a263d3b7.tgz#0891c39aaf5839f47f6feead62cd78a3a6417a39"
+  integrity sha512-tlsMg7VKm0MVPBohUPLFJcYJQdco5LxcmtOSRB8Dqbktyw0rx3o45rDzQpBBBqFPo48iR4/zB3leC7NgR00UAA==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.8.3":
   version "7.12.13"
