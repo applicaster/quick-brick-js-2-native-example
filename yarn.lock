@@ -7,13 +7,6 @@
   resolved "https://registry.yarnpkg.com/@applicaster/quick-brick-js-2-native/-/quick-brick-js-2-native-5.0.1.tgz#d523f41b27c0d322c4f64cb4305595f3e538fc98"
   integrity sha512-HgV5HVeJtx0xFAg2OVepHqcNvW010wexy/WP3bceBl8LFjlkCjFfGpNFACpDaHKy2HeltDsIBVWmanz4lLR9tA==
 
-"@applicaster/quick-brick-open-modal-bottom-sheet-cell-action@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@applicaster/quick-brick-open-modal-bottom-sheet-cell-action/-/quick-brick-open-modal-bottom-sheet-cell-action-0.0.6.tgz#28493d760c7dda8716c7ff8c800b5cf8b49856fa"
-  integrity sha512-jckaAJPAG7CDsloU5GZcLtiGHO3Q4cXLqfMBrDlwf8bEQd075tu7e2Kq1WGkbptaA0dODlQlM0pu6HW+HYgl9A==
-  dependencies:
-    ramda "^0.27.1"
-
 "@babel/code-frame@7.10.4", "@babel/code-frame@~7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -10090,11 +10083,6 @@ queue@6.0.2:
   integrity sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==
   dependencies:
     inherits "~2.0.3"
-
-ramda@^0.27.1:
-  version "0.27.1"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.1.tgz#66fc2df3ef873874ffc2da6aa8984658abacf5c9"
-  integrity sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
