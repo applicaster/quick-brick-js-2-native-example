@@ -42,7 +42,7 @@ const buttons = [
   },
 ];
 
-export function HooksExample() {
+export default function HooksExample() {
   const [hooksEnabled, setHooksEnabled] = useState(false);
   const [ready, setReady] = useState(false);
 

@@ -13,6 +13,7 @@ import { RadioButtons } from "./RadioButtons";
 import { ResultBox } from "./ResultBox";
 import { buttons, StorageTypes } from "./consts";
 
+// @ts-ignore
 import JS2Native from "@applicaster/quick-brick-js-2-native";
 
 const stringifyIfNeeded = (val: any): string => {
@@ -83,7 +84,7 @@ function getFormProps(formType: StorageTypes) {
 
 const bridge = JS2Native() || {};
 
-export function StorageExample() {
+export default function StorageExample() {
   const [formType, setFormType] = useState<StorageTypes>(
     "sessionStorage.getItem"
   );
