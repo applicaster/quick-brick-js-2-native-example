@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { Button, Surface, TextInput, Title } from "react-native-paper";
 
@@ -63,6 +63,11 @@ export default function HooksExample() {
     setReady(true);
   }, []);
 
+  const homeId = useMemo(
+    () => navigation.screens.find(({ home }) => home)?.id,
+    []
+  );
+
   if (!ready) {
     return <ActivityIndicator size="large" />;
   }
@@ -83,10 +88,12 @@ export default function HooksExample() {
           />
           <Button
             style={styles.button}
-            onPress={() => navigation.navigateToScreen(screenId)}
-            disabled={!screenId}
+            disabled={!screenId && !homeId}
+            onPress={() =>
+              homeId && navigation.navigateToScreen(screenId || homeId)
+            }
           >
-            Go to screen
+            Go to {screenId ? "screen" : "home"}
           </Button>
         </Surface>
       </View>
