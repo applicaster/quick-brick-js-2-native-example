@@ -13,14 +13,22 @@ type Props = {
   style: ViewStyle;
 };
 
-const { screenHook } = JS2Native() || {};
+const { screenHook, navigation } = JS2Native() || {};
 
 export function HookButton(props: Props) {
   const { title, success, payload, error, style } = props;
 
-  const onPress = () => {
+  const onDismissHook = () => {
     screenHook?.callback({ success, payload, error });
   };
+
+  console.log({ navigation });
+
+  const onClose = () => {
+    navigation.closeWebview();
+  };
+
+  const onPress = title === "Close screen" ? onClose : onDismissHook;
 
   return (
     <Button style={style} mode="contained" onPress={onPress}>

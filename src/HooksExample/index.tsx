@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
-import { Surface, Title } from "react-native-paper";
+import { Button, Surface, TextInput, Title } from "react-native-paper";
 
 import JS2Native from "@applicaster/quick-brick-js-2-native";
 
 import { HookButton } from "./HookButton";
 
-const { screenHook } = JS2Native() || {};
+const { screenHook, navigation } = JS2Native() || {};
 
 const styles = StyleSheet.create({
   container: {
@@ -14,37 +14,47 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 24,
     margin: 8,
-    alignSelf: "stretch",
+    alignSelf: "stretch"
   },
   title: {
     fontSize: 18,
     fontWeight: "700",
     margin: 12,
-    paddingBottom: 12,
+    paddingBottom: 12
   },
   buttonContainer: {
-    width: "100%",
+    width: "100%"
   },
   button: {
     margin: 12,
-    padding: 12,
+    padding: 12
   },
+  textInput: {
+    margin: 12,
+    padding: 12
+  }
 });
 
 const buttons = [
-  { title: "Succes", success: true, payload: {}, icon: "check" },
+  { title: "Success", success: true, payload: {}, icon: "check" },
   { title: "Cancel", success: false, payload: {} },
   {
     title: "Error",
     success: false,
     payload: {},
-    error: new Error("hooks failed"),
+    error: new Error("hooks failed")
   },
+  {
+    title: "Close screen",
+    success: true,
+    payload: {}
+  }
 ];
 
 export default function HooksExample() {
   const [hooksEnabled, setHooksEnabled] = useState(false);
   const [ready, setReady] = useState(false);
+  const [screenId, setScreenId] = useState<string>();
 
   useEffect(() => {
     if (screenHook?.data?.payload) {
@@ -58,9 +68,27 @@ export default function HooksExample() {
   }
 
   if (!hooksEnabled) {
+    const closeButton = buttons[buttons.length - 1];
+
     return (
       <View>
-        <Title>No hooks</Title>
+        <Title style={styles.title}>There are no hooks</Title>
+        <Surface style={styles.buttonContainer}>
+          <HookButton style={styles.button} {...closeButton} />
+          <TextInput
+            style={styles.textInput}
+            value={screenId}
+            onChangeText={(e) => setScreenId(e)}
+            placeholder={"type screen id"}
+          />
+          <Button
+            style={styles.button}
+            onPress={() => navigation.navigateToScreen(screenId)}
+            disabled={!screenId}
+          >
+            Go to screen
+          </Button>
+        </Surface>
       </View>
     );
   }
