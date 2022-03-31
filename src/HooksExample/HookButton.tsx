@@ -25,7 +25,7 @@ export function HookButton(props: Props) {
   console.log({ navigation });
 
   const onClose = () => {
-    navigation.closeWebview();
+    navigation?.closeWebview();
   };
 
   const onPress = title === "Close screen" ? onClose : onDismissHook;

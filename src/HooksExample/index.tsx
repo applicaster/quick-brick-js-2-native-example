@@ -64,7 +64,7 @@ export default function HooksExample() {
   }, []);
 
   const homeId = useMemo(
-    () => navigation.screens.find(({ home }) => home)?.id,
+    () => navigation?.screens?.find(({ home }) => home)?.id,
     []
   );
 
@@ -90,7 +90,7 @@ export default function HooksExample() {
             style={styles.button}
             disabled={!screenId && !homeId}
             onPress={() =>
-              homeId && navigation.navigateToScreen(screenId || homeId)
+              homeId && navigation?.navigateToScreen?.(screenId || homeId)
             }
           >
             Go to {screenId ? "screen" : "home"}
