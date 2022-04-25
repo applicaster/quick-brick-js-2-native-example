@@ -51,10 +51,14 @@ const buttons = [
   }
 ];
 
+const feedUrl =
+  "https://assets-production.applicaster.com/zapp/assets/accounts/5cc6f5d65d639a000cf17876/static_feeds/feed-d908a812-44df-453f-a601-3caada0b66a4.json";
+
 export default function HooksExample() {
   const [hooksEnabled, setHooksEnabled] = useState(false);
   const [ready, setReady] = useState(false);
   const [screenId, setScreenId] = useState<string>();
+  const [entry, setEntry] = useState<unknown>(null);
 
   useEffect(() => {
     if (screenHook?.data?.payload) {
@@ -68,46 +72,56 @@ export default function HooksExample() {
     []
   );
 
+  useEffect(() => {
+    console.log({ navigation, JS2Native: window.Applicaster });
+    fetch(feedUrl)
+      .then((res) => res.json())
+      .then((feed) => {
+        console.log({ feed });
+        const { entry } = feed;
+
+        setEntry(entry[0]);
+      });
+  }, []);
+
   if (!ready) {
     return <ActivityIndicator size="large" />;
   }
 
-  if (!hooksEnabled) {
-    const closeButton = buttons[buttons.length - 1];
-
-    return (
-      <View>
-        <Title style={styles.title}>There are no hooks</Title>
-        <Surface style={styles.buttonContainer}>
-          <HookButton style={styles.button} {...closeButton} />
-          <TextInput
-            style={styles.textInput}
-            value={screenId}
-            onChangeText={(e) => setScreenId(e)}
-            placeholder={"type screen id"}
-          />
-          <Button
-            style={styles.button}
-            disabled={!screenId && !homeId}
-            onPress={() =>
-              homeId && navigation?.navigateToScreen?.(screenId || homeId)
-            }
-          >
-            Go to {screenId ? "screen" : "home"}
-          </Button>
-        </Surface>
-      </View>
-    );
-  }
+  // if (!hooksEnabled) {
+  const closeButton = buttons[buttons.length - 1];
 
   return (
-    <View style={styles.container}>
-      <Title style={styles.title}>Testing Hooks</Title>
+    <View>
+      <Title style={styles.title}>There are no hooks</Title>
       <Surface style={styles.buttonContainer}>
-        {buttons.map((button, index) => (
-          <HookButton key={index} style={styles.button} {...button} />
-        ))}
+        <HookButton style={styles.button} {...closeButton} />
+        <TextInput
+          style={styles.textInput}
+          value={screenId}
+          onChangeText={(e) => setScreenId(e)}
+          placeholder={"type screen id"}
+        />
+        <Button
+          style={styles.button}
+          disabled={!entry}
+          onPress={() => entry && navigation?.navigateToEntry?.(entry)}
+        >
+          Open {entry?.title}
+        </Button>
       </Surface>
     </View>
   );
+  // }
+
+  // return (
+  //   <View style={styles.container}>
+  //     <Title style={styles.title}>Testing Hooks</Title>
+  //     <Surface style={styles.buttonContainer}>
+  //       {buttons.map((button, index) => (
+  //         <HookButton key={index} style={styles.button} {...button} />
+  //       ))}
+  //     </Surface>
+  //   </View>
+  // );
 }
