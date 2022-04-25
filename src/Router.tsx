@@ -30,6 +30,7 @@ export default function Router(props: Props) {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
+    // @ts-ignore
     headers: Headers,
     hooks: HooksExample,
     storage: StorageExample
