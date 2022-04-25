@@ -58,7 +58,10 @@ export default function HooksExample() {
   const [hooksEnabled, setHooksEnabled] = useState(false);
   const [ready, setReady] = useState(false);
   const [screenId, setScreenId] = useState<string>();
-  const [entry, setEntry] = useState<unknown>(null);
+  const [entry, setEntry] = useState<{
+    title: string;
+    type: { value: string };
+  } | null>(null);
 
   useEffect(() => {
     if (screenHook?.data?.payload) {
