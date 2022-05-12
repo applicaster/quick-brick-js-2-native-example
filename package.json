@@ -10,7 +10,7 @@
     "dev": "next dev"
   },
   "dependencies": {
-    "@applicaster/quick-brick-js-2-native": "^5.8.2-alpha.43e9845f",
+    "@applicaster/quick-brick-js-2-native": "5.8.2-rc.71",
     "@babel/core": "^7.14.6",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@expo/next-adapter": "^3.0.1",
