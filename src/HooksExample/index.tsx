@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { ActivityIndicator, View, StyleSheet, Linking } from "react-native";
 import { Button, Surface, TextInput, Title } from "react-native-paper";
 
 import JS2Native from "@applicaster/quick-brick-js-2-native";
@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
   }
 });
 
+const URL_SCHEME =
+  "babyfirst://open?screen_id=a1884f85-a557-46a2-9953-4e9ad7630039";
+
 const buttons = [
   { title: "Success", success: true, payload: {}, icon: "check" },
   { title: "Cancel", success: false, payload: {} },
@@ -51,8 +54,11 @@ const buttons = [
   }
 ];
 
-const feedUrl =
-  "https://assets-production.applicaster.com/zapp/assets/accounts/5cc6f5d65d639a000cf17876/static_feeds/feed-d908a812-44df-453f-a601-3caada0b66a4.json";
+const feedUrl = "https://zapp-7-babyfirst-pipes2.web.app/jw/playlists/ah83URAe";
+
+const STORE_FRONT = `babyfirst://open?feed_locator=${encodeURIComponent(
+  feedUrl
+)}`;
 
 export default function HooksExample() {
   const [hooksEnabled, setHooksEnabled] = useState(false);
@@ -111,6 +117,22 @@ export default function HooksExample() {
           onPress={() => entry && navigation?.navigateToEntry?.(entry)}
         >
           Open {entry?.title}
+        </Button>
+        <Button
+          style={styles.button}
+          onPress={() => {
+            navigation.openUrlScheme(STORE_FRONT);
+          }}
+        >
+          Open storefront
+        </Button>
+        <Button
+          style={styles.button}
+          onPress={() => {
+            navigation.openUrlScheme(URL_SCHEME);
+          }}
+        >
+          Open shows
         </Button>
       </Surface>
     </View>
